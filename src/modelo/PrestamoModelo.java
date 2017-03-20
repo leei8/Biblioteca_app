@@ -8,12 +8,8 @@ import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
-public class Prestamo_modelo extends Conector {
+public class PrestamoModelo extends Conector {
 
-	public Prestamo_modelo(String dbIzena) {
-		super(dbIzena);
-		// TODO Auto-generated constructor stub
-	}
 
 	public ArrayList<Prestamo> select() {
 		ArrayList<Prestamo> prestamos = new ArrayList<Prestamo>();

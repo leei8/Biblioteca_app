@@ -31,8 +31,8 @@ public class Prestamo {
 	
 	public void mostrarInfo() {
 	
-		Libro_modelo lm = new Libro_modelo("Biblioteka");
-		Socio_modelo sm = new Socio_modelo("Biblioteka");
+		LibroModelo lm = new LibroModelo();
+		SocioModelo sm = new SocioModelo();
 		
 		Libro libro = lm.select(this.id_libro);
 		Socio socio  = sm.select(this.id_socio);

@@ -6,6 +6,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import controlador.ControladorSocio;
+
 import javax.swing.JLabel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -18,6 +21,16 @@ import java.awt.Font;
 public class Principal extends JFrame {
 
 	private JPanel contentPane;
+	private ControladorSocio controladorSocio;
+	
+
+	public ControladorSocio getControladorSocio() {
+		return controladorSocio;
+	}
+
+	public void setControladorSocio(ControladorSocio controladorSocio) {
+		this.controladorSocio = controladorSocio;
+	}
 
 	/**
 	 * Launch the application.

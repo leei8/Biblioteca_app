@@ -7,31 +7,31 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import controlador.ControladorSocio;
+
 import javax.swing.JLabel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
-public class GestionSocios extends JDialog {
+public class GestionSocio extends JDialog {
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			GestionSocios dialog = new GestionSocios();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	//Atributos
+	private ControladorSocio controladorSocio;
+	
+	//Getters y setters
+	public ControladorSocio getControladorSocio() {
+		return controladorSocio;
+	}
+	public void setControladorSocio(ControladorSocio controladorSocio) {
+		this.controladorSocio = controladorSocio;
 	}
 
-	/**
-	 * Create the dialog.
-	 */
-	public GestionSocios() {
+	//Constructor
+	public GestionSocio(Principal principal, boolean modal) {
+		super(principal,modal);
 		setBounds(100, 100, 450, 300);
 		JButton btnNewButton = new JButton("A\u00F1adir socio");
 		JButton btnNewButton_1 = new JButton("Eliminar socio");

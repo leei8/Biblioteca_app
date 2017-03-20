@@ -6,11 +6,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public class Libro_modelo extends Conector {
+public class LibroModelo extends Conector {
 
-	public Libro_modelo(String dbIzena) {
-		super(dbIzena);
-	}
+	
 
 	public ArrayList<Libro> select() {
 		ArrayList<Libro> libros = new ArrayList<Libro>();

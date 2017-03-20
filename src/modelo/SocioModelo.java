@@ -1,15 +1,22 @@
 package modelo;
-
+import controlador.ControladorSocio;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public class Socio_modelo extends Conector {
+public class SocioModelo extends Conector {
 
-	public Socio_modelo(String dbIzena) {
-		super(dbIzena);
+	private ControladorSocio controladorSocio;
+	
+	public ControladorSocio getControladorSocio() {
+		return controladorSocio;
 	}
+
+	public void setControladorSocio(ControladorSocio controladorSocio) {
+		this.controladorSocio = controladorSocio;
+	}
+
 	
 	public Socio select(int id) {
 		try {

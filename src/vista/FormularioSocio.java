@@ -7,6 +7,9 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import controlador.ControladorSocio;
+
 import javax.swing.JLabel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -15,66 +18,68 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class FormularioSocio extends JDialog {
 
+	// Atributos
 	private final JPanel contentPanel = new JPanel();
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			FormularioSocio dialog = new FormularioSocio();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	private JTextField textFieldNombreSocio;
+	private JTextField textFieldApellidoSocio;
+	private JTextField textFieldDireccionSocio;
+	private JTextField textFieldProvinciaSocio;
+	private JTextField textFieldPoblacionSocio;
+	private JTextField textFieldDniSocio;
+	
+	// Atributo controlador y getters-setters
+	private ControladorSocio controladorSocio;
+	public ControladorSocio getControladorSocio() {
+		return controladorSocio;
+	}
+	public void setControladorSocio(ControladorSocio controladorSocio) {
+		this.controladorSocio = controladorSocio;
 	}
 
-	/**
-	 * Create the dialog.
-	 */
-	public FormularioSocio() {
+	// Constructor
+	
+	public FormularioSocio(GestionSocio padre, boolean modal) {
+		super(padre,modal);
 		setBounds(100, 100, 450, 300);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		GroupLayout groupLayout = new GroupLayout(getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addComponent(contentPanel, GroupLayout.PREFERRED_SIZE, 434, GroupLayout.PREFERRED_SIZE)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(contentPanel, GroupLayout.PREFERRED_SIZE, 434, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addComponent(contentPanel, GroupLayout.PREFERRED_SIZE, 261, GroupLayout.PREFERRED_SIZE)
+				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addComponent(contentPanel, GroupLayout.PREFERRED_SIZE, 261, GroupLayout.PREFERRED_SIZE))
 		);
 		JLabel NombreSocio = new JLabel("Nombre:");
-		JLabel lblNewLabel_1 = new JLabel("New label");
-		JLabel lblNewLabel_2 = new JLabel("New label");
-		JLabel lblNewLabel_3 = new JLabel("New label");
-		JLabel lblNewLabel_4 = new JLabel("New label");
-		JLabel lblNewLabel_5 = new JLabel("New label");
+		JLabel apellidoSocio = new JLabel("Apellido:");
+		JLabel direccionSocio = new JLabel("Direccion:");
+		JLabel poblacionSocio = new JLabel("Poblacion:");
+		JLabel provinciaSocio = new JLabel("Provincia:");
+		JLabel dniSocio = new JLabel("DNI:");
 		
-		textField = new JTextField();
-		textField.setColumns(10);
+		textFieldNombreSocio = new JTextField();
+		textFieldNombreSocio.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
+		textFieldApellidoSocio = new JTextField();
+		textFieldApellidoSocio.setColumns(10);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
+		textFieldDireccionSocio = new JTextField();
+		textFieldDireccionSocio.setColumns(10);
 		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
+		textFieldProvinciaSocio = new JTextField();
+		textFieldProvinciaSocio.setColumns(10);
 		
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
+		textFieldPoblacionSocio = new JTextField();
+		textFieldPoblacionSocio.setColumns(10);
 		
-		textField_5 = new JTextField();
-		textField_5.setColumns(10);
+		textFieldDniSocio = new JTextField();
+		textFieldDniSocio.setColumns(10);
 		GroupLayout gl_contentPanel = new GroupLayout(contentPanel);
 		gl_contentPanel.setHorizontalGroup(
 			gl_contentPanel.createParallelGroup(Alignment.LEADING)
@@ -82,19 +87,19 @@ public class FormularioSocio extends JDialog {
 					.addGap(45)
 					.addGroup(gl_contentPanel.createParallelGroup(Alignment.TRAILING)
 						.addComponent(NombreSocio)
-						.addComponent(lblNewLabel_5)
-						.addComponent(lblNewLabel_4)
-						.addComponent(lblNewLabel_3)
-						.addComponent(lblNewLabel_1)
-						.addComponent(lblNewLabel_2))
+						.addComponent(dniSocio)
+						.addComponent(provinciaSocio)
+						.addComponent(poblacionSocio)
+						.addComponent(apellidoSocio)
+						.addComponent(direccionSocio))
 					.addGap(49)
 					.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
-						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(textField_5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(textField_4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(textFieldNombreSocio, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(textFieldDireccionSocio, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(textFieldProvinciaSocio, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(textFieldDniSocio, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(textFieldApellidoSocio, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(textFieldPoblacionSocio, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap(198, Short.MAX_VALUE))
 		);
 		gl_contentPanel.setVerticalGroup(
@@ -103,27 +108,27 @@ public class FormularioSocio extends JDialog {
 					.addGap(43)
 					.addGroup(gl_contentPanel.createParallelGroup(Alignment.BASELINE)
 						.addComponent(NombreSocio)
-						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(textFieldNombreSocio, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblNewLabel_1)
-						.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(apellidoSocio)
+						.addComponent(textFieldApellidoSocio, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addGap(15)
 					.addGroup(gl_contentPanel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblNewLabel_2)
-						.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(direccionSocio)
+						.addComponent(textFieldDireccionSocio, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addGroup(gl_contentPanel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblNewLabel_3)
-						.addComponent(textField_4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(poblacionSocio)
+						.addComponent(textFieldPoblacionSocio, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addGap(18)
 					.addGroup(gl_contentPanel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblNewLabel_4)
-						.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(provinciaSocio)
+						.addComponent(textFieldProvinciaSocio, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addGap(18)
 					.addGroup(gl_contentPanel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblNewLabel_5)
-						.addComponent(textField_5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(dniSocio)
+						.addComponent(textFieldDniSocio, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap(17, Short.MAX_VALUE))
 		);
 		contentPanel.setLayout(gl_contentPanel);
