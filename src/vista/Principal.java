@@ -7,7 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import controlador.ControladorSocio;
+import controlador.*;
 
 import javax.swing.JLabel;
 import javax.swing.GroupLayout;
@@ -22,23 +22,29 @@ import java.awt.event.ActionEvent;
 
 public class Principal extends JFrame {
 
+	// Atributos
 	private JPanel contentPane;
 	private ControladorSocio controladorSocio;
+	private ControladorLibro controladorLibro;
 	
-
+	// Getters y setters
 	public ControladorSocio getControladorSocio() {
 		return controladorSocio;
 	}
-
+	
 	public void setControladorSocio(ControladorSocio controladorSocio) {
 		this.controladorSocio = controladorSocio;
 	}
-
 	
+	public ControladorLibro getControladorLibro() {
+		return controladorLibro;
+	}
 
-	/**
-	 * Create the frame.
-	 */
+	public void setControladorLibro(ControladorLibro controladorLibro) {
+		this.controladorLibro = controladorLibro;
+	}
+
+	// Constructor
 	public Principal() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 460, 311);
@@ -51,6 +57,11 @@ public class Principal extends JFrame {
 		labelIcon.setIcon(new ImageIcon("C:\\Users\\ikaslea\\Desktop\\libros.jpg"));
 		
 		JButton botonGestionLibros = new JButton("GESTION LIBROS");
+		botonGestionLibros.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			controladorLibro.abrirVentanaGestionLibros();
+			}
+		});
 		
 		JButton botonGestionSocios = new JButton("GESTION SOCIOS");
 		botonGestionSocios.addActionListener(new ActionListener() {
