@@ -17,6 +17,8 @@ import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Principal extends JFrame {
 
@@ -32,21 +34,7 @@ public class Principal extends JFrame {
 		this.controladorSocio = controladorSocio;
 	}
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Principal frame = new Principal();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	
 
 	/**
 	 * Create the frame.
@@ -65,6 +53,11 @@ public class Principal extends JFrame {
 		JButton botonGestionLibros = new JButton("GESTION LIBROS");
 		
 		JButton botonGestionSocios = new JButton("GESTION SOCIOS");
+		botonGestionSocios.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				controladorSocio.abrirVentanaGestionSocios();
+			}
+		});
 		
 		JButton botonPrestamos = new JButton("PRESTAMOS");
 		

@@ -27,6 +27,8 @@ public class Main {
 		controladorSocio.setFormularioSocio(formularioSocio);
 		controladorSocio.setSocioModelo(socioModelo);
 		
+		principal.setVisible(true);
+		
 	}
 
 }

@@ -15,6 +15,8 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class GestionSocio extends JDialog {
 
@@ -34,6 +36,11 @@ public class GestionSocio extends JDialog {
 		super(principal,modal);
 		setBounds(100, 100, 450, 300);
 		JButton btnNewButton = new JButton("A\u00F1adir socio");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				controladorSocio.abrirFormularioSocio();
+			}
+		});
 		JButton btnNewButton_1 = new JButton("Eliminar socio");
 		JButton btnNewButton_2 = new JButton("Modificar socio");
 		GroupLayout groupLayout = new GroupLayout(getContentPane());
