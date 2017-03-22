@@ -248,15 +248,6 @@ public class EliminarSocio extends JDialog {
 
 		for (Socio socio : socios) {
 			this.comboBoxSocios.addItem(socio.getId() + ": " + socio.getNombre() + " " + socio.getApellido());
-
-			// OTRA FORMA DE HACERLO, CON ITERATOR:
-			// Iterator<Socio> iterator = socios.iterator();
-			// while(iterator.hasNext()){
-			// Socio socio = iterator.next();
-			// this.comboBoxSocios.addItem(socio.getId() + ": " +
-			// socio.getNombre() + " " + socio.getApellido());
-			// }
-
 			comboBoxSocios.setSelectedItem(-1); // Para que no haya seleccionado
 												// ninguno al principio
 		}
