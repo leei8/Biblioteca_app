@@ -1,21 +1,9 @@
 package vista;
-
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-
+import controlador.*;
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
-import controlador.ControladorLibro;
-import controlador.ControladorSocio;
-
-import javax.swing.JLabel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
-import javax.swing.ImageIcon;
-import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -43,36 +31,44 @@ public class GestionSocio extends JDialog {
 			}
 		});
 		JButton botonEliminarSocio = new JButton("Eliminar socio");
+		botonEliminarSocio.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				controladorSocio.abrirEliminarSocio();
+			}
+		});
 		JButton botonModificarSocio = new JButton("Modificar socio");
+		
+		JButton btnBuscarSocios = new JButton("Consulta de socios");
+		btnBuscarSocios.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				controladorSocio.abrirConsultaSocio();
+			}
+		});
 		GroupLayout groupLayout = new GroupLayout(getContentPane());
 		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+			groupLayout.createParallelGroup(Alignment.TRAILING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(30)
 					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(botonModificarSocio))
-						.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-							.addGroup(groupLayout.createSequentialGroup()
-								.addGap(144)
-								.addComponent(botonEliminarSocio, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-							.addGroup(groupLayout.createSequentialGroup()
-								.addGap(144)
-								.addComponent(botonAnadirSocio, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-					.addGap(187))
+						.addComponent(btnBuscarSocios, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
+						.addComponent(botonModificarSocio, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
+						.addComponent(botonEliminarSocio, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
+						.addComponent(botonAnadirSocio, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE))
+					.addGap(301))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(58)
 					.addComponent(botonAnadirSocio)
-					.addGap(35)
+					.addGap(18)
 					.addComponent(botonEliminarSocio)
-					.addGap(36)
+					.addGap(18)
 					.addComponent(botonModificarSocio)
-					.addContainerGap(63, Short.MAX_VALUE))
+					.addGap(18)
+					.addComponent(btnBuscarSocios)
+					.addContainerGap(57, Short.MAX_VALUE))
 		);
 		getContentPane().setLayout(groupLayout);
 	}
-
 }

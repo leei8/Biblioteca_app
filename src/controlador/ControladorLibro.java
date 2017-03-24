@@ -55,11 +55,11 @@ public class ControladorLibro {
 
 	}
 
-//	public void cerrarFormularioLibro() {
-//		this.formularioLibro.limpiarFormularioLibro();
-//		this.formularioLibro.dispose();
-//
-//	}
+	public void cerrarFormularioLibro() {
+		this.formularioLibro.limpiarFormularioLibro();
+		this.formularioLibro.dispose();
+
+	}
 
 	public void insertarLibro(String titulo, String autor, int num_pag)  {
 		Libro libro = new Libro();

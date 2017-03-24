@@ -181,6 +181,5 @@ public class FormularioSocio extends JDialog {
 		textFieldPoblacionSocio.setText("");
 		textFieldProvinciaSocio.setText("");
 		textFieldDniSocio.setText("");
-		
 	}
 }
