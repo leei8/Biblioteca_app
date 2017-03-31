@@ -8,8 +8,6 @@ import java.util.ArrayList;
 
 public class LibroModelo extends Conector {
 
-	
-
 	public ArrayList<Libro> select() {
 		ArrayList<Libro> libros = new ArrayList<Libro>();
 		try {
@@ -32,14 +30,13 @@ public class LibroModelo extends Conector {
 			Statement st = this.conexion.createStatement();
 			ResultSet rs = st.executeQuery("select * from libros where id='" + id + "'");
 			rs.next();
-			Libro libro = new Libro(id, rs.getString("titulo"), rs.getString("autor"),
-					rs.getInt("num_pag"));
+			Libro libro = new Libro(id, rs.getString("titulo"), rs.getString("autor"), rs.getInt("num_pag"));
 			return libro;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-			return null;
+		return null;
 	}
 
 	public ArrayList<Libro> select(String autor) {
@@ -48,8 +45,7 @@ public class LibroModelo extends Conector {
 			Statement st = this.conexion.createStatement();
 			ResultSet rs = st.executeQuery("select * from libros where autor='" + autor + "'");
 			while (rs.next()) {
-				Libro libro = new Libro(rs.getInt("id"), rs.getString("titulo"), autor,
-										rs.getInt("num_pag"));
+				Libro libro = new Libro(rs.getInt("id"), rs.getString("titulo"), autor, rs.getInt("num_pag"));
 				libros.add(libro);
 			}
 		}
@@ -60,6 +56,25 @@ public class LibroModelo extends Conector {
 		}
 		return libros;
 
+	}
+
+	public ArrayList<String> selectAutores() {
+		Statement st;
+		try {
+			st = this.conexion.createStatement();
+			ResultSet rs = st.executeQuery("SELECT DISTINCT autor FROM libros");
+			ArrayList<String> autores = new ArrayList<String>();
+			while (rs.next()) {
+				autores.add(rs.getString("autor"));
+			}
+			return autores;
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return null;
 	}
 
 	public void insert(Libro libro) {
