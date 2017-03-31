@@ -44,15 +44,27 @@ public class GestionLibro extends JDialog {
 		});
 		
 		JButton botonEliminarLibro = new JButton("Eliminar libro");
+		
+		JButton btnHacerUnaBusqueda = new JButton("Hacer una busqueda");
+		btnHacerUnaBusqueda.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				consultaLibroActionPerformed();
+			}
+		});
 		GroupLayout gl_contentPanel = new GroupLayout(contentPanel);
 		gl_contentPanel.setHorizontalGroup(
 			gl_contentPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPanel.createSequentialGroup()
-					.addGap(153)
 					.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
-						.addComponent(botonEliminarLibro)
-						.addComponent(botonAnadirLibro))
-					.addContainerGap(182, Short.MAX_VALUE))
+						.addGroup(gl_contentPanel.createSequentialGroup()
+							.addGap(153)
+							.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
+								.addComponent(botonEliminarLibro)
+								.addComponent(botonAnadirLibro)))
+						.addGroup(gl_contentPanel.createSequentialGroup()
+							.addGap(136)
+							.addComponent(btnHacerUnaBusqueda)))
+					.addContainerGap(157, Short.MAX_VALUE))
 		);
 		gl_contentPanel.setVerticalGroup(
 			gl_contentPanel.createParallelGroup(Alignment.LEADING)
@@ -61,8 +73,14 @@ public class GestionLibro extends JDialog {
 					.addComponent(botonAnadirLibro)
 					.addGap(34)
 					.addComponent(botonEliminarLibro)
-					.addContainerGap(147, Short.MAX_VALUE))
+					.addGap(34)
+					.addComponent(btnHacerUnaBusqueda)
+					.addContainerGap(90, Short.MAX_VALUE))
 		);
 		contentPanel.setLayout(gl_contentPanel);
+	}
+
+	protected void consultaLibroActionPerformed() {
+		controladorLibro.abrirConsultaLibro();		
 	}
 }

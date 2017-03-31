@@ -1,5 +1,7 @@
 package controlador;
 
+import java.util.ArrayList;
+
 import modelo.*;
 import vista.*;
 
@@ -10,6 +12,7 @@ public class ControladorLibro {
 	private Principal principal;
 	private GestionLibro gestionLibro;
 	private FormularioLibro formularioLibro;
+	private ConsultaLibro consultaLibro;
 
 	// Getters y setters
 
@@ -45,6 +48,14 @@ public class ControladorLibro {
 		this.formularioLibro = formularioLibro;
 	}
 
+	public ConsultaLibro getConsultaLibro() {
+		return consultaLibro;
+	}
+
+	public void setConsultaLibro(ConsultaLibro consultaLibro) {
+		this.consultaLibro = consultaLibro;
+	}
+
 	// Metodos
 	public void abrirVentanaGestionLibros() {
 		this.gestionLibro.setVisible(true);
@@ -61,7 +72,7 @@ public class ControladorLibro {
 
 	}
 
-	public void insertarLibro(String titulo, String autor, int num_pag)  {
+	public void insertarLibro(String titulo, String autor, int num_pag) {
 		Libro libro = new Libro();
 		libro.setTitulo(titulo);
 		libro.setAutor(autor);
@@ -69,6 +80,19 @@ public class ControladorLibro {
 
 		libroModelo.insert(libro);
 
+	}
+
+	public void abrirConsultaLibro() {
+		ArrayList<Libro> libros = libroModelo.select();
+		this.consultaLibro.rellenarComboLibros(libros);
+		this.consultaLibro.setVisible(true);
+
+	}
+
+	public void rellenarPorTitulo(int idLibro) {
+		Libro libro = libroModelo.select(idLibro);
+		this.consultaLibro.llenarPestanaTitulo(libro);
+		
 	}
 
 }
