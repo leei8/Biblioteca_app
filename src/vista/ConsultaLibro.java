@@ -23,6 +23,7 @@ import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JList;
+import javax.swing.JCheckBox;
 
 public class ConsultaLibro extends JDialog {
 
@@ -171,6 +172,44 @@ public class ConsultaLibro extends JDialog {
 			{
 				JPanel panelNumPag = new JPanel();
 				tabbedPane.addTab("Por numero de paginas", null, panelNumPag, null);
+				
+				JCheckBox checkBoxMenorCien = new JCheckBox("< 100");
+				
+				JCheckBox checkBoxEntreCienQuinientos = new JCheckBox("100 - 500");
+				
+				JCheckBox checkBoxMayotQuinientos = new JCheckBox("> 500");
+				
+				JList list = new JList();
+				GroupLayout gl_panelNumPag = new GroupLayout(panelNumPag);
+				gl_panelNumPag.setHorizontalGroup(
+					gl_panelNumPag.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panelNumPag.createSequentialGroup()
+							.addGroup(gl_panelNumPag.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_panelNumPag.createSequentialGroup()
+									.addGap(58)
+									.addComponent(checkBoxMenorCien)
+									.addGap(48)
+									.addComponent(checkBoxEntreCienQuinientos)
+									.addGap(40)
+									.addComponent(checkBoxMayotQuinientos))
+								.addGroup(gl_panelNumPag.createSequentialGroup()
+									.addGap(25)
+									.addComponent(list, GroupLayout.PREFERRED_SIZE, 347, GroupLayout.PREFERRED_SIZE)))
+							.addContainerGap(57, Short.MAX_VALUE))
+				);
+				gl_panelNumPag.setVerticalGroup(
+					gl_panelNumPag.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panelNumPag.createSequentialGroup()
+							.addGap(30)
+							.addGroup(gl_panelNumPag.createParallelGroup(Alignment.BASELINE)
+								.addComponent(checkBoxMenorCien)
+								.addComponent(checkBoxMayotQuinientos)
+								.addComponent(checkBoxEntreCienQuinientos))
+							.addGap(18)
+							.addComponent(list, GroupLayout.PREFERRED_SIZE, 134, GroupLayout.PREFERRED_SIZE)
+							.addContainerGap(28, Short.MAX_VALUE))
+				);
+				panelNumPag.setLayout(gl_panelNumPag);
 			}
 		}
 	}
