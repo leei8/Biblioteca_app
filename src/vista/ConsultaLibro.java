@@ -24,6 +24,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JList;
 import javax.swing.JCheckBox;
+import javax.swing.JRadioButton;
+import javax.swing.ButtonGroup;
 
 public class ConsultaLibro extends JDialog {
 
@@ -35,6 +37,10 @@ public class ConsultaLibro extends JDialog {
 	private ControladorLibro controladorLibro;
 	private JComboBox comboBoxAutor;
 	private JList listLibros;
+	private JRadioButton RadioButtonMenor100;
+	private JRadioButton NewRadioButtonentre100y500;
+	private JRadioButton radioButton500;
+	private final ButtonGroup buttonGroup = new ButtonGroup();
 
 	// --- GETS Y SETS
 
@@ -173,28 +179,41 @@ public class ConsultaLibro extends JDialog {
 				JPanel panelNumPag = new JPanel();
 				tabbedPane.addTab("Por numero de paginas", null, panelNumPag, null);
 				
-				JCheckBox checkBoxMenorCien = new JCheckBox("< 100");
-				
-				JCheckBox checkBoxEntreCienQuinientos = new JCheckBox("100 - 500");
-				
-				JCheckBox checkBoxMayotQuinientos = new JCheckBox("> 500");
-				
 				JList list = new JList();
+				
+				RadioButtonMenor100 = new JRadioButton("<100");
+				buttonGroup.add(RadioButtonMenor100);
+				RadioButtonMenor100.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						actionPerformedMenorCien();
+					}
+				});
+				
+				NewRadioButtonentre100y500 = new JRadioButton("100-500");
+				NewRadioButtonentre100y500.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						
+					}
+				});
+				buttonGroup.add(NewRadioButtonentre100y500);
+				
+				radioButton500 = new JRadioButton(">500");
+				buttonGroup.add(radioButton500);
 				GroupLayout gl_panelNumPag = new GroupLayout(panelNumPag);
 				gl_panelNumPag.setHorizontalGroup(
 					gl_panelNumPag.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panelNumPag.createSequentialGroup()
 							.addGroup(gl_panelNumPag.createParallelGroup(Alignment.LEADING)
 								.addGroup(gl_panelNumPag.createSequentialGroup()
-									.addGap(58)
-									.addComponent(checkBoxMenorCien)
-									.addGap(48)
-									.addComponent(checkBoxEntreCienQuinientos)
-									.addGap(40)
-									.addComponent(checkBoxMayotQuinientos))
-								.addGroup(gl_panelNumPag.createSequentialGroup()
 									.addGap(25)
-									.addComponent(list, GroupLayout.PREFERRED_SIZE, 347, GroupLayout.PREFERRED_SIZE)))
+									.addComponent(list, GroupLayout.PREFERRED_SIZE, 347, GroupLayout.PREFERRED_SIZE))
+								.addGroup(gl_panelNumPag.createSequentialGroup()
+									.addGap(35)
+									.addComponent(RadioButtonMenor100)
+									.addGap(18)
+									.addComponent(NewRadioButtonentre100y500)
+									.addGap(18)
+									.addComponent(radioButton500)))
 							.addContainerGap(57, Short.MAX_VALUE))
 				);
 				gl_panelNumPag.setVerticalGroup(
@@ -202,9 +221,9 @@ public class ConsultaLibro extends JDialog {
 						.addGroup(gl_panelNumPag.createSequentialGroup()
 							.addGap(30)
 							.addGroup(gl_panelNumPag.createParallelGroup(Alignment.BASELINE)
-								.addComponent(checkBoxMenorCien)
-								.addComponent(checkBoxMayotQuinientos)
-								.addComponent(checkBoxEntreCienQuinientos))
+								.addComponent(RadioButtonMenor100)
+								.addComponent(NewRadioButtonentre100y500)
+								.addComponent(radioButton500))
 							.addGap(18)
 							.addComponent(list, GroupLayout.PREFERRED_SIZE, 134, GroupLayout.PREFERRED_SIZE)
 							.addContainerGap(28, Short.MAX_VALUE))
@@ -212,6 +231,11 @@ public class ConsultaLibro extends JDialog {
 				panelNumPag.setLayout(gl_panelNumPag);
 			}
 		}
+	}
+
+	protected void actionPerformedMenorCien() {
+		// TODO Auto-generated method stub
+		
 	}
 
 	public void rellenarComboLibros(ArrayList<Libro> libros) {
@@ -265,6 +289,16 @@ public class ConsultaLibro extends JDialog {
 		DefaultListModel defaultListModel = new DefaultListModel();
 		for (Libro libro : librosAutor) {
 			defaultListModel.addElement(libro.getTitulo() + " - " + libro.getNum_pag());
+
+			this.listLibros.setModel(defaultListModel);
+		}
+	}
+
+	public void llenarPestanaNumPag(ArrayList<Libro> libros) {
+		// TODO Auto-generated method stub
+		DefaultListModel defaultListModel = new DefaultListModel();
+		for (Libro libro : libros) {
+			defaultListModel.addElement(libro.getTitulo() + " - " + libro.getAutor()+"-"+libro.getNum_pag());
 
 			this.listLibros.setModel(defaultListModel);
 		}

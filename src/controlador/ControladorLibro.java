@@ -103,5 +103,11 @@ public class ControladorLibro {
 		this.consultaLibro.llenarListaLibrosAutor(librosAutor);
 		
 	}
+	public void rellenarPorNumPag(int num_pag) {
+		// TODO Auto-generated method stub
+		ArrayList<Libro>  libros.selectMenorCien(num_pag);
+		this.consultaLibro.llenarPestanaNumPag(libros);
+	}
+	
 
 }

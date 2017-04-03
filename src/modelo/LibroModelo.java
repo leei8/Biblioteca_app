@@ -7,6 +7,21 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class LibroModelo extends Conector {
+	
+	public  Libro selectMenorCien(int num_pag){
+		try{
+			Statement st = this.conexion.createStatement();
+			ResultSet rs = st.executeQuery("select * from libros where num_pag<100");
+			rs.next();
+			Libro libro = new Libro(num_pag, rs.getString("titulo"), rs.getString("autor"), rs.getInt("num_pag"));
+			return libro;
+		}catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
 
 	public ArrayList<Libro> select() {
 		ArrayList<Libro> libros = new ArrayList<Libro>();
@@ -126,6 +141,7 @@ public class LibroModelo extends Conector {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 
 	}
 
