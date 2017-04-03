@@ -104,4 +104,10 @@ public class ControladorLibro {
 		
 	}
 
+	public void buscarLibrosPorPaginas(int numpagmin, int numpagmax) {
+		ArrayList<Libro> libros = libroModelo.select(numpagmin, numpagmax);
+		this.consultaLibro.llenarTabla(libros);
+		
+	}
+
 }

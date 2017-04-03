@@ -58,6 +58,27 @@ public class LibroModelo extends Conector {
 
 	}
 
+	public ArrayList<Libro> select(int numpagmin, int numpagmax) {
+		ArrayList<Libro> libros = new ArrayList<Libro>();
+		try {
+			Statement st = this.conexion.createStatement();
+			ResultSet rs = st.executeQuery(
+					"select * from libros where num_pag>" + numpagmin + " and num_pag<" + numpagmax);
+			while (rs.next()) {
+				Libro libro = new Libro(rs.getInt("id"), rs.getString("titulo"), rs.getString("autor"),
+						rs.getInt("num_pag"));
+				libros.add(libro);
+			}
+		}
+
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return libros;
+
+	}
+
 	public ArrayList<String> selectAutores() {
 		Statement st;
 		try {
