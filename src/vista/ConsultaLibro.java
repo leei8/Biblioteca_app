@@ -243,10 +243,10 @@ public class ConsultaLibro extends JDialog {
 		if (radioButtonMenorCien.isSelected()) {
 			controladorLibro.buscarLibrosPorPaginas(0, 99);
 		}
-		if (radioButtonEntreCienQuinientos.isSelected()) {
+		else if (radioButtonEntreCienQuinientos.isSelected()) {
 			controladorLibro.buscarLibrosPorPaginas(100, 499);
 		}
-		if (radioButtonMayorQuinientos.isSelected()) {
+		else if (radioButtonMayorQuinientos.isSelected()) {
 			controladorLibro.buscarLibrosPorPaginas(500, 100000);
 		}
 
