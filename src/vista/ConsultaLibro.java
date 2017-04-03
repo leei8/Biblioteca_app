@@ -30,6 +30,8 @@ import javax.swing.JList;
 import javax.swing.JCheckBox;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
+import javax.swing.JRadioButton;
+import javax.swing.ButtonGroup;
 
 public class ConsultaLibro extends JDialog {
 
@@ -42,9 +44,10 @@ public class ConsultaLibro extends JDialog {
 	private JComboBox comboBoxAutor;
 	private JList listLibros;
 	private JTable table;
-	private JCheckBox checkBoxMenorCien;
-	private JCheckBox checkBoxEntreCienQuinientos;
-	private JCheckBox checkBoxMayorQuinientos;
+	private JRadioButton radioButtonMenorCien;
+	private JRadioButton radioButtonEntreCienQuinientos;
+	private JRadioButton radioButtonMayorQuinientos;
+	private final ButtonGroup buttonGroup = new ButtonGroup();
 
 	// --- GETS Y SETS
 
@@ -174,38 +177,60 @@ public class ConsultaLibro extends JDialog {
 				JPanel panelNumPag = new JPanel();
 				tabbedPane.addTab("Por numero de paginas", null, panelNumPag, null);
 
-				checkBoxMenorCien = new JCheckBox("< 100");
-				checkBoxMenorCien.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						buscarLibrosPorPaginas();
+				radioButtonMenorCien = new JRadioButton("< 100");
+				radioButtonMenorCien.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						buscarLibrosSegunRadioButton();
 					}
 				});
-				
+				buttonGroup.add(radioButtonMenorCien);
 
-				checkBoxEntreCienQuinientos = new JCheckBox("100 - 500");
-				
-				checkBoxMayorQuinientos = new JCheckBox("> 500");
-			
+				radioButtonEntreCienQuinientos = new JRadioButton("100 - 500");
+				radioButtonEntreCienQuinientos.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						buscarLibrosSegunRadioButton();
+					}
+				});
+				buttonGroup.add(radioButtonEntreCienQuinientos);
+
+				radioButtonMayorQuinientos = new JRadioButton("> 500");
+				radioButtonMayorQuinientos.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						buscarLibrosSegunRadioButton();
+					}
+				});
+				buttonGroup.add(radioButtonMayorQuinientos);
+
 				JScrollPane scrollPane = new JScrollPane();
 				GroupLayout gl_panelNumPag = new GroupLayout(panelNumPag);
-				gl_panelNumPag.setHorizontalGroup(gl_panelNumPag.createParallelGroup(Alignment.LEADING)
+				gl_panelNumPag.setHorizontalGroup(
+					gl_panelNumPag.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panelNumPag.createSequentialGroup()
-								.addGroup(gl_panelNumPag.createParallelGroup(Alignment.LEADING)
-										.addGroup(gl_panelNumPag.createSequentialGroup().addGap(62)
-												.addComponent(checkBoxMenorCien).addGap(47)
-												.addComponent(checkBoxEntreCienQuinientos).addGap(39)
-												.addComponent(checkBoxMayorQuinientos))
-										.addGroup(gl_panelNumPag.createSequentialGroup().addContainerGap().addComponent(
-												scrollPane, GroupLayout.DEFAULT_SIZE, 409, Short.MAX_VALUE)))
-								.addContainerGap()));
-				gl_panelNumPag.setVerticalGroup(gl_panelNumPag.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panelNumPag.createSequentialGroup().addGap(18)
-								.addGroup(gl_panelNumPag.createParallelGroup(Alignment.BASELINE)
-										.addComponent(checkBoxMayorQuinientos).addComponent(checkBoxMenorCien)
-										.addComponent(checkBoxEntreCienQuinientos))
-								.addPreferredGap(ComponentPlacement.UNRELATED)
-								.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
-								.addContainerGap()));
+							.addGroup(gl_panelNumPag.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_panelNumPag.createSequentialGroup()
+									.addContainerGap()
+									.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 409, Short.MAX_VALUE))
+								.addGroup(gl_panelNumPag.createSequentialGroup()
+									.addGap(62)
+									.addComponent(radioButtonMenorCien)
+									.addGap(47)
+									.addComponent(radioButtonEntreCienQuinientos)
+									.addGap(39)
+									.addComponent(radioButtonMayorQuinientos)))
+							.addContainerGap())
+				);
+				gl_panelNumPag.setVerticalGroup(
+					gl_panelNumPag.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panelNumPag.createSequentialGroup()
+							.addGap(39)
+							.addGroup(gl_panelNumPag.createParallelGroup(Alignment.BASELINE)
+								.addComponent(radioButtonMayorQuinientos)
+								.addComponent(radioButtonMenorCien)
+								.addComponent(radioButtonEntreCienQuinientos))
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
+							.addContainerGap())
+				);
 
 				table = new JTable();
 				scrollPane.setViewportView(table);
@@ -214,17 +239,17 @@ public class ConsultaLibro extends JDialog {
 		}
 	}
 
-	protected void buscarLibrosPorPaginas() {
-		if (checkBoxMenorCien.isSelected()) {
+	protected void buscarLibrosSegunRadioButton() {
+		if (radioButtonMenorCien.isSelected()) {
 			controladorLibro.buscarLibrosPorPaginas(0, 99);
 		}
-		if (checkBoxEntreCienQuinientos.isSelected()) {
+		if (radioButtonEntreCienQuinientos.isSelected()) {
 			controladorLibro.buscarLibrosPorPaginas(100, 499);
 		}
-		if (checkBoxMayorQuinientos.isSelected()) {
+		if (radioButtonMayorQuinientos.isSelected()) {
 			controladorLibro.buscarLibrosPorPaginas(500, 100000);
 		}
-		
+
 	}
 
 	public void rellenarComboLibros(ArrayList<Libro> libros) {
@@ -293,10 +318,9 @@ public class ConsultaLibro extends JDialog {
 			defaultTableModel.addRow(linea);
 		}
 		table.setModel(defaultTableModel);
-		
+
 		TableRowSorter<DefaultTableModel> modeloOrdenado;
 		modeloOrdenado = new TableRowSorter<DefaultTableModel>(defaultTableModel);
 		table.setRowSorter(modeloOrdenado);
 	}
-
 }
