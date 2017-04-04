@@ -26,7 +26,10 @@ public class Principal extends JFrame {
 	private JPanel contentPane;
 	private ControladorSocio controladorSocio;
 	private ControladorLibro controladorLibro;
+	private ControladorPrestamo controladorPrestamo;
 	
+
+
 	// Getters y setters
 	public ControladorSocio getControladorSocio() {
 		return controladorSocio;
@@ -44,6 +47,14 @@ public class Principal extends JFrame {
 		this.controladorLibro = controladorLibro;
 	}
 
+	public ControladorPrestamo getControladorPrestamo() {
+		return controladorPrestamo;
+	}
+
+	public void setControladorPrestamo(ControladorPrestamo controladorPrestamo) {
+		this.controladorPrestamo = controladorPrestamo;
+	}
+	
 	// Constructor
 	public Principal() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -71,6 +82,11 @@ public class Principal extends JFrame {
 		});
 		
 		JButton botonPrestamos = new JButton("PRESTAMOS");
+		botonPrestamos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				controladorPrestamo.abrirVentanaGestionPrestamo();
+			}
+		});
 		
 		JLabel labelBiblioteca = new JLabel("BIBLIOTECA");
 		labelBiblioteca.setToolTipText("");

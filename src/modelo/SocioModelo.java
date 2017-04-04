@@ -1,4 +1,5 @@
 package modelo;
+import controlador.ControladorPrestamo;
 import controlador.ControladorSocio;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,7 +9,9 @@ import java.util.ArrayList;
 public class SocioModelo extends Conector {
 
 	private ControladorSocio controladorSocio;
+	private ControladorPrestamo controladorPrestamo;
 	
+
 	public ControladorSocio getControladorSocio() {
 		return controladorSocio;
 	}
@@ -17,7 +20,14 @@ public class SocioModelo extends Conector {
 		this.controladorSocio = controladorSocio;
 	}
 
-	
+	public ControladorPrestamo getControladorPrestamo() {
+		return controladorPrestamo;
+	}
+
+	public void setControladorPrestamo(ControladorPrestamo controladorPrestamo) {
+		this.controladorPrestamo = controladorPrestamo;
+	}
+
 	public Socio select(int id) {
 		try {
 			Statement st = this.conexion.createStatement();

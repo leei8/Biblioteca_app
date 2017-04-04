@@ -6,7 +6,29 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import controlador.ControladorLibro;
+import controlador.ControladorPrestamo;
+
 public class LibroModelo extends Conector {
+
+	private ControladorLibro controladorLibro;
+	private ControladorPrestamo controladorPrestamo;
+
+	public ControladorLibro getControladorLibro() {
+		return controladorLibro;
+	}
+
+	public void setControladorLibro(ControladorLibro controladorLibro) {
+		this.controladorLibro = controladorLibro;
+	}
+
+	public ControladorPrestamo getControladorPrestamo() {
+		return controladorPrestamo;
+	}
+
+	public void setControladorPrestamo(ControladorPrestamo controladorPrestamo) {
+		this.controladorPrestamo = controladorPrestamo;
+	}
 
 	public ArrayList<Libro> select() {
 		ArrayList<Libro> libros = new ArrayList<Libro>();
@@ -62,8 +84,8 @@ public class LibroModelo extends Conector {
 		ArrayList<Libro> libros = new ArrayList<Libro>();
 		try {
 			Statement st = this.conexion.createStatement();
-			ResultSet rs = st.executeQuery(
-					"select * from libros where num_pag>" + numpagmin + " and num_pag<" + numpagmax);
+			ResultSet rs = st
+					.executeQuery("select * from libros where num_pag>" + numpagmin + " and num_pag<" + numpagmax);
 			while (rs.next()) {
 				Libro libro = new Libro(rs.getInt("id"), rs.getString("titulo"), rs.getString("autor"),
 						rs.getInt("num_pag"));
