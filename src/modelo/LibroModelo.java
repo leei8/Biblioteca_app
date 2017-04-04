@@ -6,32 +6,28 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import controlador.ControladorLibro;
 import controlador.ControladorPrestamo;
 
 public class LibroModelo extends Conector {
-	private ControladorPrestamo controladorprestamo;
 
-	public ControladorPrestamo getControladorprestamo() {
-		return controladorprestamo;
+	private ControladorLibro controladorLibro;
+	private ControladorPrestamo controladorPrestamo;
+
+	public ControladorLibro getControladorLibro() {
+		return controladorLibro;
 	}
 
-	public void setControladorprestamo(ControladorPrestamo controladorprestamo) {
-		this.controladorprestamo = controladorprestamo;
+	public void setControladorLibro(ControladorLibro controladorLibro) {
+		this.controladorLibro = controladorLibro;
 	}
 
-	public Libro selectMenorCien(int num_pag) {
-		try {
-			Statement st = this.conexion.createStatement();
-			ResultSet rs = st.executeQuery("select * from libros where num_pag<100");
-			rs.next();
-			Libro libro = new Libro(num_pag, rs.getString("titulo"), rs.getString("autor"), rs.getInt("num_pag"));
-			return libro;
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public ControladorPrestamo getControladorPrestamo() {
+		return controladorPrestamo;
+	}
 
-		return null;
+	public void setControladorPrestamo(ControladorPrestamo controladorPrestamo) {
+		this.controladorPrestamo = controladorPrestamo;
 	}
 
 	public ArrayList<Libro> select() {
@@ -72,6 +68,27 @@ public class LibroModelo extends Conector {
 			ResultSet rs = st.executeQuery("select * from libros where autor='" + autor + "'");
 			while (rs.next()) {
 				Libro libro = new Libro(rs.getInt("id"), rs.getString("titulo"), autor, rs.getInt("num_pag"));
+				libros.add(libro);
+			}
+		}
+
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return libros;
+
+	}
+
+	public ArrayList<Libro> select(int numpagmin, int numpagmax) {
+		ArrayList<Libro> libros = new ArrayList<Libro>();
+		try {
+			Statement st = this.conexion.createStatement();
+			ResultSet rs = st
+					.executeQuery("select * from libros where num_pag>" + numpagmin + " and num_pag<" + numpagmax);
+			while (rs.next()) {
+				Libro libro = new Libro(rs.getInt("id"), rs.getString("titulo"), rs.getString("autor"),
+						rs.getInt("num_pag"));
 				libros.add(libro);
 			}
 		}
@@ -152,27 +169,6 @@ public class LibroModelo extends Conector {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-	}
-
-	public ArrayList<Libro> select(int numpagmin, int numpagmax) {
-		ArrayList<Libro> libros = new ArrayList<Libro>();
-		try {
-			Statement st = this.conexion.createStatement();
-			ResultSet rs = st
-					.executeQuery("select * from libros where num_pag>" + numpagmin + " and num_pag<" + numpagmax);
-			while (rs.next()) {
-				Libro libro = new Libro(rs.getInt("id"), rs.getString("titulo"), rs.getString("autor"),
-						rs.getInt("num_pag"));
-				libros.add(libro);
-			}
-		}
-
-		catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return libros;
 
 	}
 

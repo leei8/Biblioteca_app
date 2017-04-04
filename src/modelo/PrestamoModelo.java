@@ -1,6 +1,5 @@
 package modelo;
 
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,11 +7,8 @@ import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
-import controlador.ControladorPrestamo;
-
 public class PrestamoModelo extends Conector {
-	// atributos
-	private ControladorPrestamo controladorprestamo;
+
 
 	public ArrayList<Prestamo> select() {
 		ArrayList<Prestamo> prestamos = new ArrayList<Prestamo>();
@@ -33,6 +29,7 @@ public class PrestamoModelo extends Conector {
 		return prestamos;
 
 	}
+
 
 	public Prestamo select(int id_libro, int id_socio, java.util.Date fecha) {
 		try {
@@ -82,15 +79,13 @@ public class PrestamoModelo extends Conector {
 			java.sql.Date fecha_sql = new java.sql.Date(prestamo.getFecha().getTime());
 			ps.setDate(3, fecha_sql); // Rellena el tercer ?
 			ps.setBoolean(4, false); // Rellena el cuarto ?
-			// Al insertar un nuevo prestamo, nunca está devuelto, por eso
-			// siempre es false
+			// Al insertar un nuevo prestamo, nunca está devuelto, por eso siempre es false
 			ps.execute();
-
-			/*
-			 * De la otra manera, sin un prepared statement Statement st =
-			 * this.conexion.createStatement(); st.execute("INSERT INTO
-			 * `libros`(`titulo`, `autor`, `num_pag`) VALUES
-			 * ('" + libro.getTitulo()+"', '"
+			
+			/* De la otra manera, sin un prepared statement
+			 * Statement st = this.conexion.createStatement();
+			 * st.execute("INSERT INTO `libros`(`titulo`, `autor`, `num_pag`)
+			 * VALUES ('" + libro.getTitulo()+"', '"
 			 * +libro.getAutor()+"','"+libro.getNum_pag()+ "')");
 			 */
 		} catch (SQLException e) {
@@ -98,14 +93,5 @@ public class PrestamoModelo extends Conector {
 			e.printStackTrace();
 		}
 	}
-
-	public ControladorPrestamo getControladorprestamo() {
-		return controladorprestamo;
-	}
-
-	public void setControladorprestamo(ControladorPrestamo controladorprestamo) {
-		this.controladorprestamo = controladorprestamo;
-	}
-	
 
 }

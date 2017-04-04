@@ -1,20 +1,24 @@
 package controlador;
 
+import java.util.ArrayList;
+
+import modelo.Libro;
 import modelo.LibroModelo;
 import modelo.PrestamoModelo;
+import modelo.Socio;
 import modelo.SocioModelo;
+import vista.FormularioPrestamo;
 import vista.GestionPrestamo;
 import vista.Principal;
-import vista.RealizarPrestamo;
 
 public class ControladorPrestamo {
-	// atributo
+
 	private Principal principal;
-	private GestionPrestamo gestionPrestamo;
-	private RealizarPrestamo realizarPrestamo;
 	private PrestamoModelo prestamoModelo;
-	private LibroModelo libroModelo;
 	private SocioModelo socioModelo;
+	private LibroModelo libroModelo;
+	private GestionPrestamo gestionPrestamo;
+	private FormularioPrestamo formularioPrestamo;
 
 	public Principal getPrincipal() {
 		return principal;
@@ -28,16 +32,16 @@ public class ControladorPrestamo {
 		return gestionPrestamo;
 	}
 
-	public void setGestionPrestamo(GestionPrestamo gestionprestamo) {
-		this.gestionPrestamo = gestionprestamo;
+	public void setGestionPrestamo(GestionPrestamo gestionPrestamo) {
+		this.gestionPrestamo = gestionPrestamo;
 	}
 
-	public RealizarPrestamo getRealizarPrestamo() {
-		return realizarPrestamo;
+	public FormularioPrestamo getFormularioPrestamo() {
+		return formularioPrestamo;
 	}
 
-	public void setRealizarPrestamo(RealizarPrestamo realizarprestamo) {
-		this.realizarPrestamo = realizarprestamo;
+	public void setFormularioPrestamo(FormularioPrestamo formularioPrestamo) {
+		this.formularioPrestamo = formularioPrestamo;
 	}
 
 	public PrestamoModelo getPrestamoModelo() {
@@ -48,28 +52,34 @@ public class ControladorPrestamo {
 		this.prestamoModelo = prestamoModelo;
 	}
 
-	public LibroModelo getLibromodelo() {
-		return libroModelo;
-	}
-
-	public void setLibromodelo(LibroModelo libromodelo) {
-		this.libroModelo = libromodelo;
-	}
-
-	public SocioModelo getSociomodelo() {
+	public SocioModelo getSocioModelo() {
 		return socioModelo;
 	}
 
-	public void setSociomodelo(SocioModelo sociomodelo) {
-		this.socioModelo = sociomodelo;
+	public void setSocioModelo(SocioModelo socioModelo) {
+		this.socioModelo = socioModelo;
 	}
-	public void abrirPrestamoModelo() {
-		this.prestamoModelo.setVisible(true);
+
+	public LibroModelo getLibroModelo() {
+		return libroModelo;
+	}
+
+	public void setLibroModelo(LibroModelo libroModelo) {
+		this.libroModelo = libroModelo;
+	}
+
+	public void abrirVentanaGestionPrestamo() {
+		this.gestionPrestamo.setVisible(true);
 
 	}
-	public void cerrarPrestamoModelo() {
-		this.prestamoModelo.limpiarFormularioLibro();
-		this.prestamoModelo.dispose();
 
+	public void abrirVentanaFormularioPrestamo() {
+		ArrayList<Socio> socios = this.socioModelo.select();
+		ArrayList<Libro> libros = this.libroModelo.select();
+		formularioPrestamo.rellenarComboBoxSocios(socios);
+		formularioPrestamo.rellenarComboBoxLibros(libros);
+		this.formularioPrestamo.setVisible(true);
+		
 	}
+
 }

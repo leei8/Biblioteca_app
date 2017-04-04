@@ -85,7 +85,7 @@ public class ControladorLibro {
 	public void abrirConsultaLibro() {
 		ArrayList<Libro> libros = libroModelo.select();
 		this.consultaLibro.rellenarComboLibros(libros);
-
+		
 		ArrayList<String> autores = libroModelo.selectAutores();
 		this.consultaLibro.rellenarComboAutores(autores);
 		this.consultaLibro.setVisible(true);
@@ -95,18 +95,19 @@ public class ControladorLibro {
 	public void rellenarPorTitulo(int idLibro) {
 		Libro libro = libroModelo.select(idLibro);
 		this.consultaLibro.llenarPestanaTitulo(libro);
-
+		
 	}
 
 	public void rellenarPorAutor(String autor) {
 		ArrayList<Libro> librosAutor = libroModelo.select(autor);
 		this.consultaLibro.llenarListaLibrosAutor(librosAutor);
-
+		
 	}
 
 	public void buscarLibrosPorPaginas(int numpagmin, int numpagmax) {
 		ArrayList<Libro> libros = libroModelo.select(numpagmin, numpagmax);
 		this.consultaLibro.llenarTabla(libros);
-
+		
 	}
+
 }

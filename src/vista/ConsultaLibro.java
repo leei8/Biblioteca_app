@@ -13,6 +13,7 @@ import javax.swing.table.TableRowSorter;
 
 import controlador.ControladorLibro;
 import modelo.Libro;
+import modelo.Socio;
 
 import javax.swing.JTabbedPane;
 import javax.swing.JComboBox;
@@ -22,12 +23,13 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.ListModel;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JList;
 import javax.swing.JCheckBox;
+import javax.swing.JTable;
+import javax.swing.JScrollPane;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
 
@@ -41,11 +43,11 @@ public class ConsultaLibro extends JDialog {
 	private ControladorLibro controladorLibro;
 	private JComboBox comboBoxAutor;
 	private JList listLibros;
-	private JRadioButton RadioButtonMenor100;
-	private JRadioButton NewRadioButtonentre100y500;
-	private JRadioButton radioButton500;
+	private JTable table;
+	private JRadioButton radioButtonMenorCien;
+	private JRadioButton radioButtonEntreCienQuinientos;
+	private JRadioButton radioButtonMayorQuinientos;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
-	private JList list;
 
 	// --- GETS Y SETS
 
@@ -175,52 +177,78 @@ public class ConsultaLibro extends JDialog {
 				JPanel panelNumPag = new JPanel();
 				tabbedPane.addTab("Por numero de paginas", null, panelNumPag, null);
 
-				list = new JList();
-
-				RadioButtonMenor100 = new JRadioButton("<100");
-				buttonGroup.add(RadioButtonMenor100);
-				RadioButtonMenor100.addActionListener(new ActionListener() {
+				radioButtonMenorCien = new JRadioButton("< 100");
+				radioButtonMenorCien.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						actionPerformedMenorCien();
+						buscarLibrosSegunRadioButton();
 					}
 				});
+				buttonGroup.add(radioButtonMenorCien);
 
-				NewRadioButtonentre100y500 = new JRadioButton("100-500");
-				NewRadioButtonentre100y500.addActionListener(new ActionListener() {
+				radioButtonEntreCienQuinientos = new JRadioButton("100 - 500");
+				radioButtonEntreCienQuinientos.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-
+						buscarLibrosSegunRadioButton();
 					}
 				});
-				buttonGroup.add(NewRadioButtonentre100y500);
+				buttonGroup.add(radioButtonEntreCienQuinientos);
 
-				radioButton500 = new JRadioButton(">500");
-				buttonGroup.add(radioButton500);
+				radioButtonMayorQuinientos = new JRadioButton("> 500");
+				radioButtonMayorQuinientos.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						buscarLibrosSegunRadioButton();
+					}
+				});
+				buttonGroup.add(radioButtonMayorQuinientos);
+
+				JScrollPane scrollPane = new JScrollPane();
 				GroupLayout gl_panelNumPag = new GroupLayout(panelNumPag);
-				gl_panelNumPag.setHorizontalGroup(gl_panelNumPag.createParallelGroup(Alignment.LEADING)
+				gl_panelNumPag.setHorizontalGroup(
+					gl_panelNumPag.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panelNumPag.createSequentialGroup()
-								.addGroup(gl_panelNumPag.createParallelGroup(Alignment.LEADING)
-										.addGroup(gl_panelNumPag.createSequentialGroup().addGap(25).addComponent(list,
-												GroupLayout.PREFERRED_SIZE, 347, GroupLayout.PREFERRED_SIZE))
-										.addGroup(gl_panelNumPag.createSequentialGroup().addGap(35)
-												.addComponent(RadioButtonMenor100).addGap(18)
-												.addComponent(NewRadioButtonentre100y500).addGap(18)
-												.addComponent(radioButton500)))
-								.addContainerGap(57, Short.MAX_VALUE)));
-				gl_panelNumPag.setVerticalGroup(gl_panelNumPag.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panelNumPag.createSequentialGroup().addGap(30)
-								.addGroup(gl_panelNumPag.createParallelGroup(Alignment.BASELINE)
-										.addComponent(RadioButtonMenor100).addComponent(NewRadioButtonentre100y500)
-										.addComponent(radioButton500))
-								.addGap(18)
-								.addComponent(list, GroupLayout.PREFERRED_SIZE, 134, GroupLayout.PREFERRED_SIZE)
-								.addContainerGap(28, Short.MAX_VALUE)));
+							.addGroup(gl_panelNumPag.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_panelNumPag.createSequentialGroup()
+									.addContainerGap()
+									.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 409, Short.MAX_VALUE))
+								.addGroup(gl_panelNumPag.createSequentialGroup()
+									.addGap(62)
+									.addComponent(radioButtonMenorCien)
+									.addGap(47)
+									.addComponent(radioButtonEntreCienQuinientos)
+									.addGap(39)
+									.addComponent(radioButtonMayorQuinientos)))
+							.addContainerGap())
+				);
+				gl_panelNumPag.setVerticalGroup(
+					gl_panelNumPag.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panelNumPag.createSequentialGroup()
+							.addGap(39)
+							.addGroup(gl_panelNumPag.createParallelGroup(Alignment.BASELINE)
+								.addComponent(radioButtonMayorQuinientos)
+								.addComponent(radioButtonMenorCien)
+								.addComponent(radioButtonEntreCienQuinientos))
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
+							.addContainerGap())
+				);
+
+				table = new JTable();
+				scrollPane.setViewportView(table);
 				panelNumPag.setLayout(gl_panelNumPag);
 			}
 		}
 	}
 
-	protected void actionPerformedMenorCien() {
-		// TODO Auto-generated method stub
+	protected void buscarLibrosSegunRadioButton() {
+		if (radioButtonMenorCien.isSelected()) {
+			controladorLibro.buscarLibrosPorPaginas(0, 99);
+		}
+		else if (radioButtonEntreCienQuinientos.isSelected()) {
+			controladorLibro.buscarLibrosPorPaginas(100, 499);
+		}
+		else if (radioButtonMayorQuinientos.isSelected()) {
+			controladorLibro.buscarLibrosPorPaginas(500, 100000);
+		}
 
 	}
 
@@ -280,17 +308,8 @@ public class ConsultaLibro extends JDialog {
 		}
 	}
 
-	public void llenarPestanaNumPag(ArrayList<Libro> libros) {
-		// TODO Auto-generated method stub
-		DefaultListModel defaultListModel = new DefaultListModel();
-		for (Libro libro : libros) {
-			defaultListModel.addElement(libro.getTitulo() + " - " + libro.getAutor() + "-" + libro.getNum_pag());
-
-			this.listLibros.setModel(defaultListModel);
-		}
-	}
-
 	public void llenarTabla(ArrayList<Libro> libros) {
+
 		DefaultTableModel defaultTableModel = new DefaultTableModel();
 		Object[] cabecera = { "TITULO", "AUTOR", "NUMERO DE PAGINAS" };
 		defaultTableModel.setColumnIdentifiers(cabecera);
@@ -298,11 +317,10 @@ public class ConsultaLibro extends JDialog {
 			Object[] linea = { libro.getTitulo(), libro.getAutor(), libro.getNum_pag() };
 			defaultTableModel.addRow(linea);
 		}
-		list.setModel((ListModel) defaultTableModel);
+		table.setModel(defaultTableModel);
 
 		TableRowSorter<DefaultTableModel> modeloOrdenado;
 		modeloOrdenado = new TableRowSorter<DefaultTableModel>(defaultTableModel);
-		list.setRowSorter(modeloOrdenado);
+		table.setRowSorter(modeloOrdenado);
 	}
-
 }
