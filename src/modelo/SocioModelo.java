@@ -1,4 +1,6 @@
 package modelo;
+
+import controlador.ControladorPrestamo;
 import controlador.ControladorSocio;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,7 +10,16 @@ import java.util.ArrayList;
 public class SocioModelo extends Conector {
 
 	private ControladorSocio controladorSocio;
-	
+	private ControladorPrestamo controladorprestamo;
+
+	public ControladorPrestamo getControladorprestamo() {
+		return controladorprestamo;
+	}
+
+	public void setControladorprestamo(ControladorPrestamo controladorprestamo) {
+		this.controladorprestamo = controladorprestamo;
+	}
+
 	public ControladorSocio getControladorSocio() {
 		return controladorSocio;
 	}
@@ -17,39 +28,36 @@ public class SocioModelo extends Conector {
 		this.controladorSocio = controladorSocio;
 	}
 
-	
 	public Socio select(int id) {
 		try {
 			Statement st = this.conexion.createStatement();
 			ResultSet rs = st.executeQuery("select * from socios where id='" + id + "'");
 			rs.next();
-			Socio socio = new Socio((id), rs.getString("nombre"), rs.getString("apellido"),
-									rs.getString("direccion"), rs.getString("poblacion"),
-									rs.getString("provincia"), rs.getString("dni"));
+			Socio socio = new Socio((id), rs.getString("nombre"), rs.getString("apellido"), rs.getString("direccion"),
+					rs.getString("poblacion"), rs.getString("provincia"), rs.getString("dni"));
 			return socio;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-			return null;
+		return null;
 	}
-	
+
 	public Socio selectSocioPorNombre(String nombre) {
 		try {
 			Statement st = this.conexion.createStatement();
 			ResultSet rs = st.executeQuery("select * from socios where nombre='" + nombre + "'");
 			rs.next();
-			Socio socio = new Socio(rs.getInt("id"),nombre, rs.getString("apellido"),
-									rs.getString("direccion"), rs.getString("poblacion"),
-									rs.getString("provincia"), rs.getString("dni"));
+			Socio socio = new Socio(rs.getInt("id"), nombre, rs.getString("apellido"), rs.getString("direccion"),
+					rs.getString("poblacion"), rs.getString("provincia"), rs.getString("dni"));
 			return socio;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-			return null;
+		return null;
 	}
-			
+
 	public ArrayList<Socio> select() {
 		ArrayList<Socio> socios = new ArrayList<Socio>();
 		try {
@@ -61,7 +69,6 @@ public class SocioModelo extends Conector {
 						rs.getString("dni")));
 			}
 
-		
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
