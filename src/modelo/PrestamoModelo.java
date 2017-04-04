@@ -99,4 +99,13 @@ public class PrestamoModelo extends Conector {
 		}
 	}
 
+	public ControladorPrestamo getControladorprestamo() {
+		return controladorprestamo;
+	}
+
+	public void setControladorprestamo(ControladorPrestamo controladorprestamo) {
+		this.controladorprestamo = controladorprestamo;
+	}
+	
+
 }

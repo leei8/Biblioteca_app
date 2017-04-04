@@ -13,8 +13,8 @@ public class ControladorPrestamo {
 	private GestionPrestamo gestionPrestamo;
 	private RealizarPrestamo realizarPrestamo;
 	private PrestamoModelo prestamoModelo;
-	private LibroModelo libromodelo;
-	private SocioModelo sociomodelo;
+	private LibroModelo libroModelo;
+	private SocioModelo socioModelo;
 
 	public Principal getPrincipal() {
 		return principal;
@@ -32,11 +32,11 @@ public class ControladorPrestamo {
 		this.gestionPrestamo = gestionprestamo;
 	}
 
-	public RealizarPrestamo getRealizarprestamo() {
+	public RealizarPrestamo getRealizarPrestamo() {
 		return realizarPrestamo;
 	}
 
-	public void setRealizarprestamo(RealizarPrestamo realizarprestamo) {
+	public void setRealizarPrestamo(RealizarPrestamo realizarprestamo) {
 		this.realizarPrestamo = realizarprestamo;
 	}
 
@@ -49,18 +49,27 @@ public class ControladorPrestamo {
 	}
 
 	public LibroModelo getLibromodelo() {
-		return libromodelo;
+		return libroModelo;
 	}
 
 	public void setLibromodelo(LibroModelo libromodelo) {
-		this.libromodelo = libromodelo;
+		this.libroModelo = libromodelo;
 	}
 
 	public SocioModelo getSociomodelo() {
-		return sociomodelo;
+		return socioModelo;
 	}
 
 	public void setSociomodelo(SocioModelo sociomodelo) {
-		this.sociomodelo = sociomodelo;
+		this.socioModelo = sociomodelo;
+	}
+	public void abrirPrestamoModelo() {
+		this.prestamoModelo.setVisible(true);
+
+	}
+	public void cerrarPrestamoModelo() {
+		this.prestamoModelo.limpiarFormularioLibro();
+		this.prestamoModelo.dispose();
+
 	}
 }
