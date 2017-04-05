@@ -183,8 +183,8 @@ public class LibroModelo extends Conector {
 				Libro libro = new Libro();
 				libro.setId(rs.getInt("id"));
 				libro.setTitulo(rs.getString("titulo"));
-				libro.setNum_pag(num_pag);
-				libro.setAutor(autor);
+				libro.setNum_pag(rs.getInt("num_pag"));
+				libro.setAutor(rs.getString("autor"));
 				
 				return libro;
 			}
