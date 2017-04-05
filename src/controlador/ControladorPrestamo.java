@@ -82,4 +82,9 @@ public class ControladorPrestamo {
 		
 	}
 
+	public void realizarPrestamo(int idSoc, String titulo) {
+		Libro libro = this.libroModelo.selecLibroPorTitulo();
+		
+	}
+
 }
