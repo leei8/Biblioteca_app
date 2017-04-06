@@ -1,9 +1,11 @@
 package controlador;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import modelo.Libro;
 import modelo.LibroModelo;
+import modelo.Prestamo;
 import modelo.PrestamoModelo;
 import modelo.Socio;
 import modelo.SocioModelo;
@@ -79,12 +81,23 @@ public class ControladorPrestamo {
 		formularioPrestamo.rellenarComboBoxSocios(socios);
 		formularioPrestamo.rellenarComboBoxLibros(libros);
 		this.formularioPrestamo.setVisible(true);
-		
+
 	}
 
 	public void realizarPrestamo(int idSoc, String titulo) {
-		Libro libro = this.libroModelo.selecLibroPorTitulo();
-		
+		Libro libro = this.libroModelo.selecLibroPorTitulo(titulo);
+		// prestamoa sortu
+		Prestamo prestamo = new Prestamo();
+		// prestamoa bete
+		prestamo.setId_libro(libro.getId());
+		prestamo.setFecha(new Date());
+		prestamo.setId_socio(idSoc);
+		prestamo.setDevuelto(false);
+		// prestamo modeloari esan isert egiteko prestamoa
+		this.prestamoModelo.insert(prestamo);
+		// garbitu
+		this.formularioPrestamo.limpiar();
+
 	}
 
 }

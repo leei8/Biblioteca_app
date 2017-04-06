@@ -51,7 +51,8 @@ public class FormularioPrestamo extends JDialog {
 		JButton btnConfirmarPrestamo = new JButton("Confirmar prestamo");
 		btnConfirmarPrestamo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				controladorPrestamo.realizarPrestamo(Integer.parseInt(textFieldSocio.getText()), textFieldTitulo.getText());
+				controladorPrestamo.realizarPrestamo(Integer.parseInt(textFieldSocio.getText()),
+						textFieldTitulo.getText());
 
 			}
 		});
@@ -103,5 +104,11 @@ public class FormularioPrestamo extends JDialog {
 		for (Libro libro : libros) {
 			// comboBoxLibros.addItem(libro.getId() + ": " + libro.getTitulo());
 		}
+	}
+
+	public void limpiar() {
+		//limpiar metodoa texfield guztiak garbituko du.
+		textFieldSocio.setText("");
+		textFieldTitulo.setText("");
 	}
 }
