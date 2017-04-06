@@ -3,6 +3,8 @@ package controlador;
 import java.util.ArrayList;
 import java.util.Date;
 
+import javax.swing.JOptionPane;
+
 import modelo.Libro;
 import modelo.LibroModelo;
 import modelo.Prestamo;
@@ -97,6 +99,8 @@ public class ControladorPrestamo {
 		this.prestamoModelo.insert(prestamo);
 		// garbitu
 		this.formularioPrestamo.limpiar();
+		JOptionPane.showMessageDialog(formularioPrestamo, "mailegua eginda", "Mailegua",
+				JOptionPane.INFORMATION_MESSAGE);
 
 	}
 
