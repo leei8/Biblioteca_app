@@ -39,7 +39,7 @@ public class SocioModelo extends Conector {
 			return socio;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 			return null;
 	}
@@ -121,4 +121,13 @@ public class SocioModelo extends Conector {
 
 	}
 
-}
+	//public boolean existe(int idSoc) {
+		//if(idSoc ==){
+			
+//		}else{
+//			
+//		}
+//		return false;
+	}
+
+

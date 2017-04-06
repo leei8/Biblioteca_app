@@ -1,6 +1,7 @@
 package vista;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.util.ArrayList;
 
@@ -17,6 +18,7 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
@@ -110,5 +112,14 @@ public class FormularioPrestamo extends JDialog {
 		//limpiar metodoa texfield guztiak garbituko du.
 		textFieldSocio.setText("");
 		textFieldTitulo.setText("");
+	}
+
+	public void errorPorSocioMall() {
+		JOptionPane.showMessageDialog(this, "mailegua esin da egin", "errorea",
+				JOptionPane.ERROR_MESSAGE);
+		textFieldSocio.setBackground(Color.RED);
+		textFieldSocio.setText("");
+		
+		
 	}
 }

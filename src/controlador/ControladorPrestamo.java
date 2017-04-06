@@ -87,20 +87,27 @@ public class ControladorPrestamo {
 	}
 
 	public void realizarPrestamo(int idSoc, String titulo) {
-		Libro libro = this.libroModelo.selecLibroPorTitulo(titulo);
-		// prestamoa sortu
-		Prestamo prestamo = new Prestamo();
-		// prestamoa bete
-		prestamo.setId_libro(libro.getId());
-		prestamo.setFecha(new Date());
-		prestamo.setId_socio(idSoc);
-		prestamo.setDevuelto(false);
-		// prestamo modeloari esan isert egiteko prestamoa
-		this.prestamoModelo.insert(prestamo);
-		// garbitu
-		this.formularioPrestamo.limpiar();
-		JOptionPane.showMessageDialog(formularioPrestamo, "mailegua eginda", "Mailegua",
-				JOptionPane.INFORMATION_MESSAGE);
+		if (this.socioModelo.select(idSoc) != null) {
+			// sozioa existitzen da
+			Libro libro = this.libroModelo.selecLibroPorTitulo(titulo);
+			// prestamoa sortu
+			Prestamo prestamo = new Prestamo();
+			// prestamoa bete
+			prestamo.setId_libro(libro.getId());
+			prestamo.setFecha(new Date());
+			prestamo.setId_socio(idSoc);
+			prestamo.setDevuelto(false);
+			// prestamo modeloari esan isert egiteko prestamoa
+			this.prestamoModelo.insert(prestamo);
+			// garbitu
+			this.formularioPrestamo.limpiar();
+			JOptionPane.showMessageDialog(formularioPrestamo, "mailegua eginda", "Mailegua",
+					JOptionPane.INFORMATION_MESSAGE);
+		} else {
+			// sozioa ez da existitzen //falta terminar esto.
+			
+			this.formularioPrestamo.errorPorSocioMall();
+		}
 
 	}
 
