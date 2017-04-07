@@ -1,5 +1,7 @@
 package modelo;
 
+import java.util.ArrayList;
+
 public class Socio {
 	
 	//-----Atributos
@@ -11,6 +13,7 @@ public class Socio {
 	String poblacion;
 	String provincia;
 	String dni;
+	private ArrayList<Prestamo> prestamos = new ArrayList<Prestamo>();
 	
 	//-----Constructores
 	

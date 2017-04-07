@@ -4,16 +4,35 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Prestamo {
-	
-	//-----Atributos
-	
+
+	// -----Atributos
+
 	int id_libro;
 	int id_socio;
 	Date fecha;
 	boolean devuelto;
-
-	//-----Constructores
+	private Libro libro;
+	private Socio socio;
 	
+
+	// -----Constructores
+
+	public Libro getLibro() {
+		return libro;
+	}
+
+	public void setLibro(Libro libro) {
+		this.libro = libro;
+	}
+
+	public Socio getSocio() {
+		return socio;
+	}
+
+	public void setSocio(Socio socio) {
+		this.socio = socio;
+	}
+
 	public Prestamo(int id_libro, int id_socio, Date fecha, boolean devuelto) {
 		super();
 		this.id_libro = id_libro;
@@ -21,31 +40,31 @@ public class Prestamo {
 		this.fecha = fecha;
 		this.devuelto = devuelto;
 	}
-	
+
 	public Prestamo() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	//-----Metodos
-	
+	// -----Metodos
+
 	public void mostrarInfo() {
-	
+
 		LibroModelo lm = new LibroModelo();
 		SocioModelo sm = new SocioModelo();
-		
+
 		Libro libro = lm.select(this.id_libro);
-		Socio socio  = sm.select(this.id_socio);
-		
+		Socio socio = sm.select(this.id_socio);
+
 		System.out.println("Nombre de libro: " + libro.getTitulo());
 		System.out.println("Nombre de socio: " + socio.getNombre());
 		System.out.println("Fecha: " + this.fecha);
-		System.out.println("Ha sido devuelto?: " + (this.devuelto?"Si":"No"));
+		System.out.println("Ha sido devuelto?: " + (this.devuelto ? "Si" : "No"));
 		System.out.println("------------------------------");
 	}
-	
-	//-----Getters y Setters
-	
+
+	// -----Getters y Setters
+
 	public int getId_libro() {
 		return id_libro;
 	}

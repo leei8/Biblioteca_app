@@ -11,6 +11,7 @@ import modelo.Prestamo;
 import modelo.PrestamoModelo;
 import modelo.Socio;
 import modelo.SocioModelo;
+import vista.BusquedaPrestamo;
 import vista.FormularioPrestamo;
 import vista.GestionPrestamo;
 import vista.Principal;
@@ -23,6 +24,7 @@ public class ControladorPrestamo {
 	private LibroModelo libroModelo;
 	private GestionPrestamo gestionPrestamo;
 	private FormularioPrestamo formularioPrestamo;
+	private BusquedaPrestamo busquedaPrestamo;
 
 	public Principal getPrincipal() {
 		return principal;
@@ -109,6 +111,24 @@ public class ControladorPrestamo {
 			this.formularioPrestamo.errorPorSocioMall();
 		}
 
+	}
+
+	public void abrirVentanaBusquedaPrestamo() {
+		this.busquedaPrestamo.setVisible(true);
+		
+	}
+
+	public BusquedaPrestamo getBusquedaPrestamo() {
+		return busquedaPrestamo;
+	}
+
+	public void setBusquedaPrestamo(BusquedaPrestamo busquedaPrestamo) {
+		this.busquedaPrestamo = busquedaPrestamo;
+	}
+
+	public void mostrarPrestamoSocio() {
+		this.prestamoModelo.selectPrestamosDesocio();
+		
 	}
 
 }

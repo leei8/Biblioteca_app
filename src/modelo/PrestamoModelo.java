@@ -9,7 +9,6 @@ import java.util.ArrayList;
 
 public class PrestamoModelo extends Conector {
 
-
 	public ArrayList<Prestamo> select() {
 		ArrayList<Prestamo> prestamos = new ArrayList<Prestamo>();
 		try {
@@ -29,7 +28,6 @@ public class PrestamoModelo extends Conector {
 		return prestamos;
 
 	}
-
 
 	public Prestamo select(int id_libro, int id_socio, java.util.Date fecha) {
 		try {
@@ -54,11 +52,27 @@ public class PrestamoModelo extends Conector {
 		try {
 
 			Statement st = this.conexion.createStatement();
-			ResultSet rs = st.executeQuery("select * from prestamos where id_socio=" + id_socio);
+			ResultSet rs = st.executeQuery(
+					"select libros.*,prestamos.* from prestamos join libros on prestamos.id_libro = where id_socio=?");
 			while (rs.next()) {
-				Prestamo prestamo = new Prestamo(rs.getInt("id_libro"), rs.getInt("id_socio"), rs.getDate("fecha"),
-						rs.getBoolean("devuelto"));
-				prestamos_socio.add(prestamo);
+				//liburuak bete 
+				Libro libro = new Libro();
+				libro.setId(rs.getInt("id"));
+				libro.setTitulo(rs.getString("titulo"));
+				libro.setAutor(rs.getString("autor"));
+				libro.setNum_pag(rs.getInt("num_pag"));
+				//socioak bete
+				Socio socio = new Socio();
+				//hay que meter otro join arriba para incluir al socio en el select.
+				
+				
+				//prestamoak bete
+				Prestamo prestamo = new Prestamo();
+				prestamo.setFecha(rs.getDate("fecha"));
+				prestamo.setDevuelto(rs.getBoolean("devuelto"));
+				prestamo.setLibro(libro);
+				prestamo.setSocio(socio);
+				
 			}
 			return prestamos_socio;
 		} catch (SQLException e) {
@@ -79,19 +93,25 @@ public class PrestamoModelo extends Conector {
 			java.sql.Date fecha_sql = new java.sql.Date(prestamo.getFecha().getTime());
 			ps.setDate(3, fecha_sql); // Rellena el tercer ?
 			ps.setBoolean(4, false); // Rellena el cuarto ?
-			// Al insertar un nuevo prestamo, nunca está devuelto, por eso siempre es false
+			// Al insertar un nuevo prestamo, nunca está devuelto, por eso
+			// siempre es false
 			ps.execute();
-			
-			/* De la otra manera, sin un prepared statement
-			 * Statement st = this.conexion.createStatement();
-			 * st.execute("INSERT INTO `libros`(`titulo`, `autor`, `num_pag`)
-			 * VALUES ('" + libro.getTitulo()+"', '"
+
+			/*
+			 * De la otra manera, sin un prepared statement Statement st =
+			 * this.conexion.createStatement(); st.execute("INSERT INTO
+			 * `libros`(`titulo`, `autor`, `num_pag`) VALUES
+			 * ('" + libro.getTitulo()+"', '"
 			 * +libro.getAutor()+"','"+libro.getNum_pag()+ "')");
 			 */
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	public void selectPrestamosDesocio(int id_socio) {
+
 	}
 
 }

@@ -16,6 +16,7 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class GestionPrestamo extends JDialog {
 
@@ -50,6 +51,13 @@ public class GestionPrestamo extends JDialog {
 		}
 		JLabel lblGestionDePrestamos = new JLabel("GESTION DE PRESTAMOS");
 		lblGestionDePrestamos.setFont(new Font("Tahoma", Font.BOLD, 18));
+		
+		JButton btnConsultarPrestamo = new JButton("Consultar prestamo");
+		btnConsultarPrestamo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				controladorPrestamo.abrirVentanaBusquedaPrestamo();
+			}
+		});
 		GroupLayout gl_contentPanel = new GroupLayout(contentPanel);
 		gl_contentPanel.setHorizontalGroup(
 			gl_contentPanel.createParallelGroup(Alignment.LEADING)
@@ -60,7 +68,9 @@ public class GestionPrestamo extends JDialog {
 							.addComponent(lblGestionDePrestamos))
 						.addGroup(gl_contentPanel.createSequentialGroup()
 							.addGap(147)
-							.addComponent(btnRealizarPrestamo)))
+							.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
+								.addComponent(btnConsultarPrestamo)
+								.addComponent(btnRealizarPrestamo))))
 					.addContainerGap(105, Short.MAX_VALUE))
 		);
 		gl_contentPanel.setVerticalGroup(
@@ -70,9 +80,10 @@ public class GestionPrestamo extends JDialog {
 					.addComponent(lblGestionDePrestamos)
 					.addGap(35)
 					.addComponent(btnRealizarPrestamo)
-					.addContainerGap(160, Short.MAX_VALUE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnConsultarPrestamo)
+					.addContainerGap(131, Short.MAX_VALUE))
 		);
 		contentPanel.setLayout(gl_contentPanel);
 	}
-
 }
